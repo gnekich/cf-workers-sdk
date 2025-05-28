@@ -392,6 +392,15 @@ export function validateScopeKeys(
 }
 
 function getCallbackUrl(host = "localhost", port = 8976) {
+	if (
+		host === "localhost" ||
+		host === "0.0.0.0" ||
+		host === "::" ||
+		host === "::1" ||
+		host === "127.0.0.1"
+	) {
+		return `http://localhost:${port}/oauth/callback`;
+	}
 	return `http://${host}:${port}/oauth/callback`;
 }
 
@@ -1071,7 +1080,7 @@ export async function login(
 	complianceConfig: ComplianceConfig,
 	props: LoginProps = {
 		browser: true,
-		callbackHost: "localhost",
+		callbackHost: "localhost", // "0.0.0.0",
 		callbackPort: 8976,
 	}
 ): Promise<boolean> {
