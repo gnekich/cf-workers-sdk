@@ -1059,11 +1059,9 @@ export async function getOauthToken(options: {
 			}
 		});
 
-		if (options.callbackHost !== "localhost" || options.callbackPort !== 8976) {
-			logger.log(
-				`Temporary login server listening on ${options.callbackHost}:${options.callbackPort}`
-			);
-		}
+		logger.log(
+			`Temporary login server listening on ${options.callbackHost}:${options.callbackPort}`
+		);
 		server.listen(options.callbackPort, options.callbackHost);
 	});
 	if (options.browser) {
@@ -1080,7 +1078,7 @@ export async function login(
 	complianceConfig: ComplianceConfig,
 	props: LoginProps = {
 		browser: true,
-		callbackHost: "localhost", // "0.0.0.0",
+		callbackHost: "0.0.0.0",
 		callbackPort: 8976,
 	}
 ): Promise<boolean> {
